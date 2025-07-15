@@ -1,0 +1,32 @@
+<!-- login.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Login</title>
+  </head>
+  <body>
+    <h1>Mock SaaS Login</h1>
+    <input id="email" type="email" placeholder="Email" />
+    <input id="password" type="password" placeholder="Password" />
+    <button id="loginBtn">Log In</button>
+
+    <script>
+      document.getElementById("loginBtn").addEventListener("click", () => {
+        fetch("/api/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: email.value,
+            password: password.value,
+          }),
+        })
+          .then((r) => r.json())
+          .then((res) => {
+            localStorage.setItem("token", res.token);
+            window.location = "/dashboard.html";
+          });
+      });
+    </script>
+  </body>
+</html>

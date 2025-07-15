@@ -1,0 +1,56 @@
+<!-- dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dashboard</title>
+  </head>
+  <body>
+    <h1 id="welcome">Welcome</h1>
+
+    <section id="projectsSection">
+      <h2>Your Projects</h2>
+      <ul id="projects"></ul>
+    </section>
+
+    <section id="activitySection">
+      <h2>Recent Activity</h2>
+      <ul id="activity"></ul>
+    </section>
+
+    <script>
+      const token = localStorage.getItem("token");
+      const headers = { Authorization: "Bearer " + token };
+
+      fetch("/api/user/me", { headers })
+        .then((r) => r.json())
+        .then((u) => {
+          welcome.innerText = `Welcome, ${u.name}`;
+        });
+
+      fetch("/api/projects", { headers })
+        .then((r) => r.json())
+        .then((data) => {
+          projects.innerHTML = "";
+          data.projects.forEach((p) => {
+            const li = document.createElement("li");
+            li.className = "project-item";
+            li.textContent = `${p.name} — ${p.status}`;
+            projects.appendChild(li);
+          });
+        });
+
+      fetch("/api/activity", { headers })
+        .then((r) => r.json())
+        .then((data) => {
+          activity.innerHTML = "";
+          data.activity.forEach((a) => {
+            const li = document.createElement("li");
+            li.className = "activity-item";
+            li.textContent = `${a.action} ${a.item}`;
+            activity.appendChild(li);
+          });
+        });
+    </script>
+  </body>
+</html>
