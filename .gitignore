@@ -1,0 +1,38 @@
+
+
+# === Node.js ===
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+.env
+.env.*
+
+# === Cypress ===
+cypress/screenshots/
+cypress/videos/
+cypress/downloads/
+cypress/results/
+cypress/logs/
+
+# Optional: Ignore all Cypress test files (not recommended if you want to version control tests)
+# cypress/e2e/
+
+# === Mac & OS-specific ===
+.DS_Store
+
+# === VSCode ===
+.vscode/
+
+# === Git backup ===
+*.orig
+
+# === Coverage / Output folders ===
+coverage/
+.nyc_output/
+dist/
+build/
+tmp/
+temp/
+.cache/
